@@ -5,20 +5,23 @@
             <div class="section">
                 <div class="container" v-bind:class="{'container-on':accountClass,'container-off':!accountClass}">
                     <div  class="content" >
-                        <span>手机号</span>
+                        <span class="title">手机号</span>
                         <input type="text" name="account" @focus="changeBorder(1)" v-model="phone">
+                        <span class="error" v-show="error">账号格式不正确</span>
                     </div>
                 </div>
                 <div class="container" v-bind:class="{'container-on':passwordClass,'container-off':!passwordClass}">
                     <div class="content">
-                        <span>密码</span>
+                        <span class="title">密码</span>
                         <input  type="password" name="passwd" @focus="changeBorder(2)">
                     </div>
                 </div>
             </div>
+
             <div class="footer">
-                <div class="button">注册</div>
+                <cube-button  >登录</cube-button>
             </div>
+
         </div>
     </div>
 </template>
@@ -38,23 +41,35 @@
                 if (value == 1) {
                     this.accountClass = true
                 } else {
+                    this.error = false
                     this.passwordClass = true
                     //正则验证手机号码
                     var reg=11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
                     //var url="/nptOfficialWebsite/apply/sendSms?mobile="+this.ruleForm.phone;
                     if(this.phone==''){
-                        console.log("请输入手机号码");
+                        this.error = true
+
                     }else if(!reg.test(this.phone)){
-                        console.log("手机格式不正确");
+
+                        this.error = true
+
                     }
                 }
             },
+            showPopup(refId) {
+                const component = this.$refs[refId]
+                component.show()
+                setTimeout(() => {
+                    component.hide()
+                }, 2000)
+            }
         },
         data() {
             return {
                 accountClass: false,
                 passwordClass: false,
-                phone:''
+                phone:'',
+                error:false
             }
         },
 
@@ -82,9 +97,14 @@
             .content
                 input
                     margin-left 1rem
-                span
+                    width 10rem
+                .title
                     display inline-block
-                    width 3rem
+                    width  3rem
+                 .error
+                    font-size 0.8rem
+                    color red
+                    margin-left 1rem
         .container-on
             border-bottom 1px  solid #00d314
         .container-off
@@ -92,13 +112,5 @@
         .register
             margin-top 2rem
     .footer
-        width 100%
-        height 3.5rem
-        background-color #00d314
-        /*opacity:0.3;*/
-        border-radius 0.3rem
-        color white
-        text-align center
-        line-height 3.5rem
         margin-top 20%
 </style>

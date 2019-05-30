@@ -23,8 +23,9 @@
                 </div>
             </div>
             <div class="footer">
-                <div class="button">登录</div>
+                <cube-button >登录</cube-button>
             </div>
+
         </div>
     </div>
 </template>
@@ -86,13 +87,5 @@
             .register-span
                 color #155ccb
     .footer
-        width 100%
-        height 3.5rem
-        background-color #00d314
-        /*opacity:0.3;*/
-        border-radius 0.3rem
-        color white
-        text-align center
-        line-height 3.5rem
         margin-top 20%
 </style>

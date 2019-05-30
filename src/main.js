@@ -1,6 +1,11 @@
 import Vue from 'vue'
+import './cube-ui'
 import App from './App.vue'
 import router from './router/index'
+import {Style, Button,Popup} from 'cube-ui'
+Vue.use(Style)
+Vue.use(Button)
+Vue.use(Popup)
 Vue.config.productionTip = false
 
 new Vue({
